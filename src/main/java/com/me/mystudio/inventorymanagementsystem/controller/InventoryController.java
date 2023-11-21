@@ -14,18 +14,25 @@ import com.me.mystudio.inventorymanagementsystem.service.InventoryService;
 public class InventoryController {
 
     @Autowired
-    private InventoryService InventoryService;
+    private InventoryService inventoryService;
 
     @GetMapping("/add-inventory")
     public String showAddProductForm(Model model) {
         model.addAttribute("inventory", new Inventory());
+        model.addAttribute("inventories", inventoryService.getAllInventories());
         return "add-inventory";
     }
 
     @PostMapping("/add-inventory")
-    public String addProduct(@ModelAttribute("inventory") Inventory inventory) {
+    public String addInventory(@ModelAttribute("inventory") Inventory inventory, Model model) {
         // Add the inventory to the database
-        InventoryService.addProduct(inventory);
-        return "redirect:/admin-dashboard";
+        inventoryService.addInventory(inventory);
+
+        // Clear the form by adding a new, empty Inventory object to the model
+        model.addAttribute("inventory", new Inventory());
+
+        // Add the updated list of inventories to the model
+        model.addAttribute("inventories", inventoryService.getAllInventories());
+        return "add-inventory";
     }
 }

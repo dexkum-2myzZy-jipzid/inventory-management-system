@@ -5,18 +5,23 @@ import org.springframework.stereotype.Service;
 
 import com.me.mystudio.inventorymanagementsystem.model.Inventory;
 import com.me.mystudio.inventorymanagementsystem.repository.InventoryRepository;
+import java.util.List;
 
 @Service
 public class InventoryService {
 
-    private final InventoryRepository InventoryRepository;
+    private final InventoryRepository inventoryRepository;
 
     @Autowired
-    public InventoryService(InventoryRepository InventoryRepository) {
-        this.InventoryRepository = InventoryRepository;
+    public InventoryService(InventoryRepository inventoryRepository) {
+        this.inventoryRepository = inventoryRepository;
     }
 
-    public Inventory addProduct(Inventory inventory) {
-        return InventoryRepository.save(inventory);
+    public Inventory addInventory(Inventory inventory) {
+        return inventoryRepository.save(inventory);
+    }
+
+    public List<Inventory> getAllInventories() {
+        return inventoryRepository.findAll();
     }
 }

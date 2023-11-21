@@ -9,8 +9,8 @@ import jakarta.persistence.Id;
 public class Inventory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String name;
     private String category;
     private int quantity;
@@ -27,6 +27,7 @@ public class Inventory {
         this.quantity = quantity;
         this.price = price;
     }
+
     // Getters and setters
 
     public Long getId() {
