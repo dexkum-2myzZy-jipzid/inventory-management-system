@@ -35,4 +35,24 @@ public class InventoryController {
         model.addAttribute("inventories", inventoryService.getAllInventories());
         return "add-inventory";
     }
+
+    @GetMapping("/remove-inventory")
+    public String showRemoveInventoryForm(Model model) {
+        model.addAttribute("inventory", new Inventory());
+        model.addAttribute("inventories", inventoryService.getAllInventories());
+        return "remove-inventory";
+    }
+
+    @PostMapping("/remove-inventory")
+    public String removeInventory(@ModelAttribute("inventory") Inventory inventory, Model model) {
+        // remove the inventory from the database
+        inventoryService.removeInventory(inventory.getId());
+        // Clear the form by adding a new, empty Inventory object to the model
+        model.addAttribute("inventory", new Inventory());
+
+        // Add the updated list of inventories to the model
+        model.addAttribute("inventories", inventoryService.getAllInventories());
+        return "remove-inventory";
+    }
+
 }

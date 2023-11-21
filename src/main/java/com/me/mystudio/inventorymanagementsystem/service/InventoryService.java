@@ -24,4 +24,8 @@ public class InventoryService {
     public List<Inventory> getAllInventories() {
         return inventoryRepository.findAll();
     }
+
+    public void removeInventory(Long id) {
+        inventoryRepository.deleteById(id);
+    }
 }
