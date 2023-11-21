@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard</title>
+  </head>
+  <body>
+    <h1>Welcome Admin!</h1>
+    <p
+      th:text="'Hello, ' + ${user.username} + '! You are an ' + ${user.role} + '.'"></p>
+    <p>This is the admin dashboard.</p>
+  </body>
+</html>
