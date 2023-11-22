@@ -10,12 +10,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.me.mystudio.inventorymanagementsystem.model.Inventory;
 import com.me.mystudio.inventorymanagementsystem.service.InventoryService;
+import java.util.List;
 
 @Controller
 public class InventoryController {
 
     @Autowired
     private InventoryService inventoryService;
+
+    @GetMapping("/view-inventory")
+    public String viewInventory(Model model) {
+        // Get the list of inventories from the database
+        List<Inventory> inventories = inventoryService.getAllInventories();
+
+        // Add the list of inventories to the model
+        model.addAttribute("inventories", inventories);
+
+        // Return the view name
+        return "view-inventory";
+    }
 
     @GetMapping("/add-inventory")
     public String showAddProductForm(Model model) {

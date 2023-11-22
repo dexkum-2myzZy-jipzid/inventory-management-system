@@ -12,36 +12,41 @@
   </head>
   <body>
     <main>
-      <form
-        th:action="@{/remove-inventory}"
-        th:object="${inventory}"
-        method="post">
-        <div class="mb-3">
-          <label for="id" class="form-label">Inventory ID:</label>
-          <input type="text" th:field="*{id}" id="id" class="form-control" />
-        </div>
-        <button type="submit" class="btn btn-primary">Remove Inventory</button>
-      </form>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Category</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="inventory : ${inventories}">
-            <td th:text="${inventory.id}"></td>
-            <td th:text="${inventory.name}"></td>
-            <td th:text="${inventory.category}"></td>
-            <td th:text="${inventory.quantity}"></td>
-            <td th:text="${inventory.price}"></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="container" style="max-width: 44rem">
+        <h1>Remove Inventory</h1>
+        <form
+          th:action="@{/remove-inventory}"
+          th:object="${inventory}"
+          method="post">
+          <div class="mb-3">
+            <label for="id" class="form-label">Inventory ID:</label>
+            <input type="text" th:field="*{id}" id="id" class="form-control" />
+          </div>
+          <button type="submit" class="btn btn-primary">
+            Remove Inventory
+          </button>
+        </form>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Category</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="inventory : ${inventories}">
+              <td th:text="${inventory.id}"></td>
+              <td th:text="${inventory.name}"></td>
+              <td th:text="${inventory.category}"></td>
+              <td th:text="${inventory.quantity}"></td>
+              <td th:text="${inventory.price}"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </main>
   </body>
 </html>
