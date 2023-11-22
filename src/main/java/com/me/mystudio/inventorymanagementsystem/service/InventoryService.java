@@ -28,4 +28,12 @@ public class InventoryService {
     public void removeInventory(Long id) {
         inventoryRepository.deleteById(id);
     }
+
+    public void updateInventory(Inventory inventory) {
+        inventoryRepository.save(inventory);
+    }
+
+    public Inventory getInventoryById(Long id) {
+        return inventoryRepository.findById(id).orElse(null);
+    }
 }
