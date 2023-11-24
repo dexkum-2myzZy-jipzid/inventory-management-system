@@ -30,14 +30,14 @@ public class InventoryController {
         return "view-inventory";
     }
 
-    @GetMapping("/add-inventory")
+    @GetMapping("/admin/add-inventory")
     public String showAddProductForm(Model model) {
         model.addAttribute("inventory", new Inventory());
         model.addAttribute("inventories", inventoryService.getAllInventories());
         return "add-inventory";
     }
 
-    @PostMapping("/add-inventory")
+    @PostMapping("/admin/add-inventory")
     public String addInventory(@ModelAttribute("inventory") Inventory inventory, Model model) {
         // Add the inventory to the database
         inventoryService.addInventory(inventory);
@@ -48,14 +48,14 @@ public class InventoryController {
         return "add-inventory";
     }
 
-    @GetMapping("/remove-inventory")
+    @GetMapping("/admin/remove-inventory")
     public String showRemoveInventoryForm(Model model) {
         model.addAttribute("inventory", new Inventory());
         model.addAttribute("inventories", inventoryService.getAllInventories());
         return "remove-inventory";
     }
 
-    @PostMapping("/remove-inventory")
+    @PostMapping("/admin/remove-inventory")
     public String removeInventory(@ModelAttribute("inventory") Inventory inventory, Model model) {
         // remove the inventory from the database
         inventoryService.removeInventory(inventory.getId());
@@ -66,13 +66,13 @@ public class InventoryController {
         return "remove-inventory";
     }
 
-    @GetMapping("/update-inventory")
+    @GetMapping("/admin/update-inventory")
     public String showUpdateInventoryForm(Model model) {
         model.addAttribute("inventories", inventoryService.getAllInventories());
         return "update-inventory";
     }
 
-    @PostMapping("/update-inventory")
+    @PostMapping("/admin/update-inventory")
     public String updateInventory(@RequestParam("id") Long id,
             @RequestParam("name") String name,
             @RequestParam("quantity") Integer quantity,
