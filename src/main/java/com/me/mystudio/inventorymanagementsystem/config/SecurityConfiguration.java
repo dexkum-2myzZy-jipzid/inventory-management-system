@@ -1,5 +1,6 @@
 package com.me.mystudio.inventorymanagementsystem.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -69,22 +70,24 @@ public class SecurityConfiguration {
     }
 
     /**
-     * Creates a UserDetailsService bean to manage users.
+     * Creates a UserDetailsService bean to retrieve user-related data.
      *
      * @return the UserDetailsService bean
      */
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Bean
     public UserDetailsService userDetailsService() {
-        // Create two UserDetails objects, one is user and the other is admin.
         UserDetails user = User.builder()
                 .username("user")
-                .password(passwordEncoder().encode("user"))
+                .password(passwordEncoder.encode("user"))
                 .roles("USER")
                 .build();
 
         UserDetails admin = User.builder()
                 .username("admin")
-                .password(passwordEncoder().encode("admin"))
+                .password(passwordEncoder.encode("admin"))
                 .roles("ADMIN")
                 .build();
 

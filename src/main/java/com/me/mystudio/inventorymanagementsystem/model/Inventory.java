@@ -56,11 +56,10 @@ public class Inventory {
         this.category = category;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
     public void setQuantity(int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative");
+        }
         this.quantity = quantity;
     }
 
@@ -69,6 +68,9 @@ public class Inventory {
     }
 
     public void setPrice(double price) {
+        if (price <= 0) {
+            throw new IllegalArgumentException("Price must be positive");
+        }
         this.price = price;
     }
 }

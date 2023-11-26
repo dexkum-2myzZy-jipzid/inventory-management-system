@@ -3,6 +3,7 @@ package com.me.mystudio.inventorymanagementsystem.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.me.mystudio.inventorymanagementsystem.exception.InventoryNotFoundException;
 import com.me.mystudio.inventorymanagementsystem.model.Inventory;
 import com.me.mystudio.inventorymanagementsystem.repository.InventoryRepository;
 import java.util.List;
@@ -47,6 +48,9 @@ public class InventoryService {
      * @param id the inventory id
      */
     public void removeInventory(Long id) {
+        if (!inventoryRepository.existsById(id)) {
+            throw new InventoryNotFoundException("Inventory not found with id: " + id);
+        }
         inventoryRepository.deleteById(id);
     }
 
@@ -55,8 +59,11 @@ public class InventoryService {
      *
      * @param inventory the Inventory object
      */
-    public void updateInventory(Inventory inventory) {
-        inventoryRepository.save(inventory);
+    public Inventory updateInventory(Inventory inventory) {
+        if (!inventoryRepository.existsById(inventory.getId())) {
+            throw new InventoryNotFoundException("Inventory not found with id: " + inventory.getId());
+        }
+        return inventoryRepository.save(inventory);
     }
 
     /**

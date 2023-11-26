@@ -28,20 +28,14 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             Authentication authentication) throws IOException {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         authorities.forEach(authority -> {
-            if (authority.getAuthority().equals("ROLE_USER")) {
-                try {
+            try {
+                if (authority.getAuthority().equals("ROLE_USER")) {
                     redirectStrategy.sendRedirect(request, response, "/user/dashboard");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else if (authority.getAuthority().equals("ROLE_ADMIN")) {
-                try {
+                } else if (authority.getAuthority().equals("ROLE_ADMIN")) {
                     redirectStrategy.sendRedirect(request, response, "/admin/dashboard");
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-            } else {
-                throw new IllegalStateException();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }
