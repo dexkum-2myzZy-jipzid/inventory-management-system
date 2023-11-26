@@ -10,17 +10,33 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @Controller
 public class LoginController {
 
+    /**
+     * Displays the login page.
+     *
+     * @param user the User object
+     * @return the login page
+     */
     @GetMapping("/")
     public String login(@ModelAttribute("user") User user) {
         return "login";
     }
 
+    /**
+     * Displays the admin-dashboard page.
+     *
+     * @return the admin-dashboard page
+     */
     @GetMapping("/admin/dashboard")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String adminDashboard() {
         return "admin-dashboard";
     }
 
+    /**
+     * Displays the user-dashboard page.
+     *
+     * @return the user-dashboard page
+     */
     @GetMapping("/user/dashboard")
     @PreAuthorize("hasRole('ROLE_USER')")
     public String userDashboard() {

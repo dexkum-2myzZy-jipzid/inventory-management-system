@@ -1,16 +1,21 @@
 package com.me.mystudio.inventorymanagementsystem.model;
 
+/**
+ * Model class for the user table.
+ */
 public class User {
     private String username;
     private String password;
     private String role;
 
+    // Constructors
     public User(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;
     }
 
+    // Getters and setters
     public String getUsername() {
         return username;
     }
@@ -35,4 +40,3 @@ public class User {
         this.role = role;
     }
 }
-

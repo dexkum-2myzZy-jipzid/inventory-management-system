@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+/**
+ * Model class for the inventory table.
+ */
 @Entity
 public class Inventory {
 
@@ -29,7 +32,6 @@ public class Inventory {
     }
 
     // Getters and setters
-
     public Long getId() {
         return id;
     }

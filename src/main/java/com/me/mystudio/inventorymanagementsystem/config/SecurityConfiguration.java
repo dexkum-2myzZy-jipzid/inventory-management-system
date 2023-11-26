@@ -2,8 +2,6 @@ package com.me.mystudio.inventorymanagementsystem.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
@@ -21,11 +19,23 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+    /**
+     * Creates a PasswordEncoder bean to encrypt and decrypt passwords.
+     *
+     * @return the PasswordEncoder bean
+     */
     @Bean
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Configures the security filter chain.
+     *
+     * @param http the HttpSecurity object to configure
+     * @return the configured SecurityFilterChain
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http)
             throws Exception {
@@ -41,34 +51,31 @@ public class SecurityConfiguration {
                         .anyRequest().authenticated())
                 .formLogin(
                         form -> form
-                            .loginPage("/")
-                            .loginProcessingUrl("/login")
                                 .successHandler(new CustomAuthenticationSuccessHandler())
                                 .permitAll())
                 .headers(
                         headers -> headers
                                 .frameOptions(
-                                    HeadersConfigurer.FrameOptionsConfig::sameOrigin))
+                                        HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .logout(
                         logout -> logout
                                 .logoutRequestMatcher(
                                         new AntPathRequestMatcher(
                                                 "/logout"))
+                                .deleteCookies("JSESSIONID")
                                 .permitAll());
 
         return http.build();
     }
 
-//     @Bean
-//     public AuthenticationManager
-//     authenticationManager(AuthenticationConfiguration configuration) throws
-//     Exception {
-//     return configuration.getAuthenticationManager();
-//     }
-
+    /**
+     * Creates a UserDetailsService bean to manage users.
+     *
+     * @return the UserDetailsService bean
+     */
     @Bean
     public UserDetailsService userDetailsService() {
-
+        // Create two UserDetails objects, one is user and the other is admin.
         UserDetails user = User.builder()
                 .username("user")
                 .password(passwordEncoder().encode("user"))

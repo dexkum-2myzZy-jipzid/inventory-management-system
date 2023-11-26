@@ -12,27 +12,59 @@ public class InventoryService {
 
     private final InventoryRepository inventoryRepository;
 
+    /**
+     * Constructor injection.
+     *
+     * @param inventoryRepository the InventoryRepository object
+     */
     @Autowired
     public InventoryService(InventoryRepository inventoryRepository) {
         this.inventoryRepository = inventoryRepository;
     }
 
+    /**
+     * Adds a new inventory to the database.
+     *
+     * @param inventory the Inventory object
+     * @return the Inventory object
+     */
     public Inventory addInventory(Inventory inventory) {
         return inventoryRepository.save(inventory);
     }
 
+    /**
+     * Gets all inventories from the database.
+     *
+     * @return list of inventories
+     */
     public List<Inventory> getAllInventories() {
         return inventoryRepository.findAll();
     }
 
+    /**
+     * Removes an inventory from the database.
+     *
+     * @param id the inventory id
+     */
     public void removeInventory(Long id) {
         inventoryRepository.deleteById(id);
     }
 
+    /**
+     * Updates an inventory in the database.
+     *
+     * @param inventory the Inventory object
+     */
     public void updateInventory(Inventory inventory) {
         inventoryRepository.save(inventory);
     }
 
+    /**
+     * Gets an inventory by id.
+     *
+     * @param id the inventory id
+     * @return the Inventory object
+     */
     public Inventory getInventoryById(Long id) {
         return inventoryRepository.findById(id).orElse(null);
     }

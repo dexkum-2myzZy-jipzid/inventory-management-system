@@ -15,6 +15,14 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
+    /**
+     * Redirects the user to the appropriate dashboard based on their role.
+     *
+     * @param request        the HttpServletRequest object
+     * @param response       the HttpServletResponse object
+     * @param authentication the Authentication object
+     * @throws IOException if an error occurs during redirection
+     */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException {
