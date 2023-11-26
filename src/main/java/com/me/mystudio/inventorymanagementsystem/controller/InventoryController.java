@@ -18,7 +18,7 @@ public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
 
-    @GetMapping("/view-inventory")
+    @GetMapping({ "/admin/view-inventory", "/user/view-inventory" })
     public String viewInventory(Model model) {
         // Get the list of inventories from the database
         List<Inventory> inventories = inventoryService.getAllInventories();
@@ -34,7 +34,7 @@ public class InventoryController {
     public String showAddProductForm(Model model) {
         model.addAttribute("inventory", new Inventory());
         model.addAttribute("inventories", inventoryService.getAllInventories());
-        return "add-inventory";
+        return "admin/add-inventory";
     }
 
     @PostMapping("/admin/add-inventory")
@@ -45,7 +45,7 @@ public class InventoryController {
         model.addAttribute("inventory", new Inventory());
         // Add the updated list of inventories to the model
         model.addAttribute("inventories", inventoryService.getAllInventories());
-        return "add-inventory";
+        return "admin/add-inventory";
     }
 
     @GetMapping("/admin/remove-inventory")

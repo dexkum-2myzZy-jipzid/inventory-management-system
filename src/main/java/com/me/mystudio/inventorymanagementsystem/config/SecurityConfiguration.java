@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,12 +14,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfiguration {
 
     @Bean
@@ -29,27 +30,25 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http)
             throws Exception {
 
-        MvcRequestMatcher h2Matcher = new MvcRequestMatcher(new HandlerMappingIntrospector(), "/h2-console/**");
-        MvcRequestMatcher adminMatcher = new MvcRequestMatcher(new HandlerMappingIntrospector(), "/admin/**");
-        MvcRequestMatcher userMatcher = new MvcRequestMatcher(new HandlerMappingIntrospector(), "/user/**");
-
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers(h2Matcher)
-                        .permitAll()
-                        .requestMatchers(adminMatcher)
+                .authorizeHttpRequests(requests -> requests
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
+                        .hasAnyRole("ADMIN", "USER")
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/admin/**"))
                         .hasRole("ADMIN")
-                        .requestMatchers(userMatcher)
-                        .hasAnyRole("USER")
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/user/**"))
+                        .hasRole("USER")
                         .anyRequest().authenticated())
                 .formLogin(
                         form -> form
-                                .loginPage("/login")
-                                .loginProcessingUrl("/login")
+                            .loginPage("/")
+                            .loginProcessingUrl("/login")
                                 .successHandler(new CustomAuthenticationSuccessHandler())
                                 .permitAll())
-                .headers().frameOptions().sameOrigin()
-                .and()
+                .headers(
+                        headers -> headers
+                                .frameOptions(
+                                    HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                 .logout(
                         logout -> logout
                                 .logoutRequestMatcher(
@@ -60,10 +59,12 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
-    }
+//     @Bean
+//     public AuthenticationManager
+//     authenticationManager(AuthenticationConfiguration configuration) throws
+//     Exception {
+//     return configuration.getAuthenticationManager();
+//     }
 
     @Bean
     public UserDetailsService userDetailsService() {
