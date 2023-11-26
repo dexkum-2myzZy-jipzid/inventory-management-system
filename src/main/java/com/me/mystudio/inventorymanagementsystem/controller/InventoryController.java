@@ -36,7 +36,7 @@ public class InventoryController {
         model.addAttribute("inventories", inventories);
 
         // Return the view name
-        return "view-inventory";
+        return "shared/view-inventory";
     }
 
     /**
@@ -80,7 +80,7 @@ public class InventoryController {
     public String showRemoveInventoryForm(Model model) {
         model.addAttribute("inventory", new Inventory());
         model.addAttribute("inventories", inventoryService.getAllInventories());
-        return "remove-inventory";
+        return "admin/remove-inventory";
     }
 
     /**
@@ -98,7 +98,7 @@ public class InventoryController {
         model.addAttribute("inventory", new Inventory());
         // Add the updated list of inventories to the model
         model.addAttribute("inventories", inventoryService.getAllInventories());
-        return "remove-inventory";
+        return "admin/remove-inventory";
     }
 
     /**
@@ -110,7 +110,7 @@ public class InventoryController {
     @GetMapping("/admin/update-inventory")
     public String showUpdateInventoryForm(Model model) {
         model.addAttribute("inventories", inventoryService.getAllInventories());
-        return "update-inventory";
+        return "admin/update-inventory";
     }
 
     /**
@@ -145,7 +145,7 @@ public class InventoryController {
 
         model.addAttribute("inventories", inventoryService.getAllInventories());
 
-        return "update-inventory";
+        return "admin/update-inventory";
     }
 
 }

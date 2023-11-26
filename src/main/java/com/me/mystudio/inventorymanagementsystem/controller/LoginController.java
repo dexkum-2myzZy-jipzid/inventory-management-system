@@ -29,7 +29,7 @@ public class LoginController {
     @GetMapping("/admin/dashboard")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String adminDashboard() {
-        return "admin-dashboard";
+        return "admin/admin-dashboard";
     }
 
     /**
@@ -40,6 +40,6 @@ public class LoginController {
     @GetMapping("/user/dashboard")
     @PreAuthorize("hasRole('ROLE_USER')")
     public String userDashboard() {
-        return "user-dashboard";
+        return "user/user-dashboard";
     }
 }
