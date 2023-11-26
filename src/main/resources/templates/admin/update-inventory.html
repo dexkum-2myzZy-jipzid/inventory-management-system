@@ -14,7 +14,7 @@
     <main>
       <div class="container" style="max-width: 44rem">
         <h1>Update Inventory</h1>
-        <table class="table">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -43,31 +43,36 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function () {
-        $("#save-btn").click(function () {
-          var row = $(this).closest("tr");
-          var id = row.find("td:nth-child(1)").text();
-          var name = row.find("td:nth-child(2)").text();
-          var quantity = row.find("td:nth-child(3)").text();
-          var price = row.find("td:nth-child(4)").text();
+        var saveButtons = document.querySelectorAll("#save-btn");
+        console.log("------------");
+        console.log(saveButtons);
+        saveButtons.forEach(function (button) {
+          button.addEventListener("click", function () {
+            var row = $(this).closest("tr");
+            var id = row.find("td:nth-child(1)").text();
+            var name = row.find("td:nth-child(2)").text();
+            var quantity = row.find("td:nth-child(3)").text();
+            var price = row.find("td:nth-child(4)").text();
 
-          // Send the updated data to the server
-          $.ajax({
-            url: "/admin/update-inventory",
-            type: "POST",
-            data: {
-              id: id,
-              name: name,
-              quantity: quantity,
-              price: price,
-            },
-            success: function (response) {
-              // Handle the response from the server
-              alert("Inventory updated successfully");
-            },
-            error: function (error) {
-              // Handle any errors
-              alert("An error occurred");
-            },
+            // Send the updated data to the server
+            $.ajax({
+              url: "/admin/update-inventory",
+              type: "POST",
+              data: {
+                id: id,
+                name: name,
+                quantity: quantity,
+                price: price,
+              },
+              success: function (response) {
+                // Handle the response from the server
+                alert("Inventory updated successfully");
+              },
+              error: function (error) {
+                // Handle any errors
+                alert("An error occurred");
+              },
+            });
           });
         });
       });
