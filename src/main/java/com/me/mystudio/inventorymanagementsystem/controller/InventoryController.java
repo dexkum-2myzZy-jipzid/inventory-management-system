@@ -148,4 +148,33 @@ public class InventoryController {
         return "admin/update-inventory";
     }
 
+    /**
+     * Displays the search-inventory page.
+     *
+     * @param model the Model object
+     * @return the search-inventory page
+     */
+    @GetMapping("/user/search-inventory")
+    public String showSearchInventoryForm(Model model) {
+        model.addAttribute("inventories", inventoryService.getAllInventories());
+        return "user/search-inventory";
+    }
+
+    /**
+     * Displays the search-inventory page.
+     *
+     * @param model the Model object
+     * @return the search-inventory page
+     */
+    @PostMapping("/user/search-inventory")
+    public String searchInventory(@RequestParam String searchTerm, Model model) {
+        if (searchTerm == null || searchTerm.isEmpty()) {
+            model.addAttribute("inventories", inventoryService.getAllInventories());
+        } else {
+            List<Inventory> items = inventoryService.searchInventory(searchTerm);
+            model.addAttribute("inventories", items);
+        }
+        return "user/search-inventory";
+    }
+
 }

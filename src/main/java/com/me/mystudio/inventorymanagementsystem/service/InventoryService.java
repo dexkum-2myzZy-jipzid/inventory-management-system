@@ -8,6 +8,9 @@ import com.me.mystudio.inventorymanagementsystem.model.Inventory;
 import com.me.mystudio.inventorymanagementsystem.repository.InventoryRepository;
 import java.util.List;
 
+/**
+ * Service class for handling inventory-related requests.
+ */
 @Service
 public class InventoryService {
 
@@ -74,5 +77,16 @@ public class InventoryService {
      */
     public Inventory getInventoryById(Long id) {
         return inventoryRepository.findById(id).orElse(null);
+    }
+
+    /**
+     * Gets an inventory by name.
+     *
+     * @param name the inventory name
+     * @return the Inventory object
+     */
+    public List<Inventory> searchInventory(String searchTerm) {
+        String lowerCaseSearchTerm = searchTerm.toLowerCase();
+        return inventoryRepository.findByNameContainingIgnoreCase(lowerCaseSearchTerm);
     }
 }

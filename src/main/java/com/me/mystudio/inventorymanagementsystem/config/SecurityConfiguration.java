@@ -16,6 +16,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
+/**
+ * Configuration class for security-related beans.
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
