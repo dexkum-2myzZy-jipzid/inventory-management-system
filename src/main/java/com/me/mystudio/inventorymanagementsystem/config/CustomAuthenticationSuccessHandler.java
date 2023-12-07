@@ -11,6 +11,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collection;
 
+/**
+ * This class is responsible for handling successful authentication events.
+ * 
+ * The method checks the role of the user and redirects he to the appropriate
+ * dashboard.
+ */
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
