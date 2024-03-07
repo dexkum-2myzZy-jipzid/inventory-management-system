@@ -1,42 +1,14 @@
-<div style="text-align: center; font-size: 20px; ">
-	Application Requirements Specification
-</div>
-<div style="text-align: center; font-size: 20px; ">
-	For
-</div>
-<div style="text-align: center; font-size: 20px; ">
-	Inventory Management System
-</div>
-
-
-
-
-
-
-<div style="text-align: center; font-size: 20px; ">
-  Prepared By:
-</div>
-<div style="text-align: center; font-size: 20px; ">
-  Liang Chen
-</div>
-<div style="page-break-after: always;"></div>
-
-
-
+# Inventory Management System
 
 ## Purpose and Scope Statement
 
 The goal of this project is to create a streamlined and user-friendly Inventory Management System (IMS) to assist businesses in efficiently managing their inventory, tracking stock levels, and optimizing inventory-related processes. The scope encompasses functionalities such as adding, updating, and removing products, as well as search Inventory.
-
-
 
 ## Usage
 
 1. Run the application
 2. Open your browser and enter http://localhost:8080
 3. Enter Username & Password (See them from Below)
-
-
 
 There are two types of users in this system: Admin and User.
 
@@ -54,8 +26,6 @@ Admin has full access to all features including adding, updating, deleting, and 
 
 User has limited access and can only view and search the products in the inventory.
 
-
-
 ## Requirements Narrative
 
 ### Users and Functions
@@ -63,12 +33,15 @@ User has limited access and can only view and search the products in the invento
 #### Admin
 
 1. **Add Inventory:**
+
    - Admin can add new products to the inventory, specifying details like product name, category, quantity, and unit price.
 
 2. **Update Inventory:**
+
    - Capability to modify inventory details, such as quantity, price, or category.
 
 3. **Remove Inventory:**
+
    - Admin can remove products that are no longer part of the inventory.
 
 4. **View Inventory:**
@@ -77,62 +50,53 @@ User has limited access and can only view and search the products in the invento
 #### User
 
 1. **Search Inventory:**
+
    - Users can search for inventories by case-insensitive name.
 
 2. **View Inventory:**
    - Display a comprehensive list of all products in the inventory, including their details.
 
-<div style="page-break-after: always;"></div>
-
 ## Objectives
 
 The basic login screen is as below:
 
-<img src="/Users/mario/Desktop/Canvas/INFO5100.18913.202410/final-project/attachment/login.jpeg" alt="login" style="zoom:50%;" />
-
-
+![Login](https://github.com/dexkum-2myzZy-jipzid/inventory-management-system/blob/main/attachment/login.jpeg)
 
 #### The screen for the admin is as follows:
 
 Dashboard Page
 
-<img src="/Users/mario/Desktop/Canvas/INFO5100.18913.202410/final-project/attachment/admin-dashboard.jpeg" alt="admin-dashboard" style="zoom:50%;" />
-
-
+![Admin Dashboard](https://github.com/dexkum-2myzZy-jipzid/inventory-management-system/blob/main/attachment/admin-dashboard.jpeg)
 
 View Inventory
 
-<img src="/Users/mario/Desktop/Canvas/INFO5100.18913.202410/final-project/attachment/view-inventory.jpeg" alt="view-inventory" style="zoom:50%;" />
+![View Inventory](https://github.com/dexkum-2myzZy-jipzid/inventory-management-system/blob/main/attachment/view-inventory.jpeg)
 
 Add Inventory
 
-<img src="/Users/mario/Desktop/Canvas/INFO5100.18913.202410/final-project/attachment/add-inventory.png" alt="add-inventory" style="zoom:30%;" />
+![Add Inventory](https://github.com/dexkum-2myzZy-jipzid/inventory-management-system/blob/main/attachment/add-inventory.png)
 
 Update Inventory
 
-<img src="/Users/mario/Desktop/Canvas/INFO5100.18913.202410/final-project/attachment/update-inventory.jpeg" alt="update-inventory" style="zoom:50%;" />
+![Update Inventory](https://github.com/dexkum-2myzZy-jipzid/inventory-management-system/blob/main/attachment/update-inventory.jpeg)
 
 Remove Inventory
 
-<img src="/Users/mario/Desktop/Canvas/INFO5100.18913.202410/final-project/attachment/remove-inventory.jpeg" alt="remove-inventory" style="zoom:50%;" />
+![remove-inventory.jpeg](https://github.com/dexkum-2myzZy-jipzid/inventory-management-system/blob/main/attachment/remove-inventory.jpeg)
 
 #### The screen for the user is as follows:
 
 Dashboard Page
 
-<img src="/Users/mario/Desktop/Canvas/INFO5100.18913.202410/final-project/attachment/user-dashboard.jpeg" alt="user-dashboard" style="zoom:50%;" />
+![User Dashboard](https://github.com/dexkum-2myzZy-jipzid/inventory-management-system/blob/main/attachment/user-dashboard.jpeg)
 
 View Inventory
 
-<img src="/Users/mario/Desktop/Canvas/INFO5100.18913.202410/final-project/attachment/view-inventory.jpeg" alt="view-inventory" style="zoom:50%;" />
+![View Inventory](https://github.com/dexkum-2myzZy-jipzid/inventory-management-system/blob/main/attachment/view-inventory.jpeg)
 
 Seach Inventory
 
-<img src="/Users/mario/Desktop/Canvas/INFO5100.18913.202410/final-project/attachment/search-inventory.jpeg" alt="search-inventory" style="zoom:50%;" />
-
-
-
-<div style="page-break-after: always;"></div>
+![Search Inventory](https://github.com/dexkum-2myzZy-jipzid/inventory-management-system/blob/main/attachment/search-inventory.jpeg)
 
 ## Functional Specification
 
@@ -142,10 +106,10 @@ The invoked functionality depends on the user logging into the system.
 
 #### Admin Functions:
 
- 1. View Inventory
- 2. Add Inventory
- 3. Remove Inventory
- 4. Update Inventory
+1.  View Inventory
+2.  Add Inventory
+3.  Remove Inventory
+4.  Update Inventory
 
 #### User Functions:
 
@@ -158,8 +122,6 @@ The invoked functionality depends on the user logging into the system.
 2. CustomAuthenticationSuccessHandler (Role-Based Redirect)
 3. User Details Service (Create two default users username and password)
 4. Password Encoder
-
-
 
 ### Classes Needed
 
@@ -200,24 +162,22 @@ The basic classes needed for application are
 ### Technologies Needed
 
 1. **Backend:**
+
    - Language: Java.
    - Framework: Spring Boot, Spring Security
 
 2. **Frontend:**
-   - UI:  HTML generated by Thymeleaf
+
+   - UI: HTML generated by Thymeleaf
 
 3. **Database:**
    - H2 database for storing inventory data.
-
-<div style="page-break-after: always;"></div>
 
 ## Logic Specification
 
 The backend will handle the logic for adding, updating, and removing products. The frontend will provide an intuitive interface for users to interact with the inventory management system.
 
-![logic-specification](/Users/mario/Desktop/Canvas/INFO5100.18913.202410/final-project/attachment/logic-specification.png)
-
-
+![Logic Specification](https://github.com/dexkum-2myzZy-jipzid/inventory-management-system/blob/main/attachment/logic-specification.png)
 
 ## License
 
